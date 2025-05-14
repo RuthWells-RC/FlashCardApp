@@ -32,6 +32,7 @@ class MainActivity : ComponentActivity() {
 @SuppressLint("ContextCastToActivity")
 @Composable
 fun QuizFlashcardApp() {
+ //List of question-answer pairs(true/false)
  val questions = listOf(
   "Columbus was the first European to sail to the Americas" to true,
   "The Battle of Agincourt was fought by Henry II" to false,
@@ -39,7 +40,7 @@ fun QuizFlashcardApp() {
   "The Nazis invaded Greece during WWII" to true,
   "The Great Wall of China is visible from space." to false
  )
-
+ // State variables for quiz logic and UI updates
  var currentIndex by rememberSaveable { mutableStateOf(-1) }
  var score by rememberSaveable { mutableStateOf(0) }
  var feedback by rememberSaveable { mutableStateOf("") }
@@ -48,8 +49,10 @@ fun QuizFlashcardApp() {
  var hasAnswered by remember { mutableStateOf(false) }
  val userAnswers = remember { mutableStateListOf<Boolean>() }
 
+ //Access the current Activity context for exiting app
  val activity = (LocalContext.current as? Activity)
 
+ // Main UI column
  Column(
   modifier = Modifier
    .background(Color(0xFFE3F2FD)) // Light blue background
@@ -58,11 +61,15 @@ fun QuizFlashcardApp() {
   verticalArrangement = Arrangement.Center,
   horizontalAlignment = Alignment.CenterHorizontally
  ) {
+
+  //Display different screens based on quiz tests
   when {
+   //Answer review screen
    showReview -> {
     Text("📖 Review Answers", fontSize = 24.sp)
     Spacer(modifier = Modifier.height(16.dp))
 
+    // Show each question with user's result
     questions.forEachIndexed { i, pair ->
      val correctAnswer = pair.second
      val userAnswer = if (i < userAnswers.size) userAnswers[i] else null
@@ -72,6 +79,7 @@ fun QuizFlashcardApp() {
      Spacer(modifier = Modifier.height(12.dp))
     }
 
+    //Buttons to restart or exit
     Spacer(modifier = Modifier.height(16.dp))
     Button(onClick = {
      currentIndex = -1
@@ -88,6 +96,7 @@ fun QuizFlashcardApp() {
     }
    }
 
+   //Result screen after finishing all question
    showResult -> {
     Text("🏁 Quiz Completed!", fontSize = 24.sp)
     Spacer(modifier = Modifier.height(12.dp))
@@ -119,7 +128,7 @@ fun QuizFlashcardApp() {
      Text("Exit")
     }
    }
-
+   //Welcome screen before quiz starts
    currentIndex == -1 -> {
     Text("🎉 Welcome to History Quiz!", fontSize = 24.sp)
     Spacer(modifier = Modifier.height(24.dp))
@@ -135,7 +144,7 @@ fun QuizFlashcardApp() {
      Text("Exit")
     }
    }
-
+   //Quiz screen: show current question
    else -> {
     Text("Question ${currentIndex + 1}", fontSize = 18.sp)
     Spacer(modifier = Modifier.height(8.dp))
@@ -186,6 +195,7 @@ fun QuizFlashcardApp() {
     Spacer(modifier = Modifier.height(16.dp))
     Text(feedback, fontSize = 18.sp)
 
+    //Show "Next button only after answered
     if (hasAnswered) {
      Spacer(modifier = Modifier.height(12.dp))
      Button(onClick = {
@@ -204,6 +214,7 @@ fun QuizFlashcardApp() {
  }
 }
 
+//Helper function in increment index or mark completion
 fun goToNextQuestion(current: Int, total: Int, update: (Int) -> Unit) {
  update(current + 1)
 }
