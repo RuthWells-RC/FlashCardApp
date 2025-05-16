@@ -9,9 +9,11 @@ https://github.com/RuthWells-RC/FlashCardApp
 
 
 YouTube Link:
+https://www.youtube.com/watch?v=Iq_4vu-PMSI
 
 
 Report:
+
 The Flashcard Quiz App is a simple, interactive Android application built with Jetpack Compose that tests users with true/false questions, provides instant feedback, tracks scores, and includes a review feature for learning reinforcement.
 
 
@@ -79,7 +81,8 @@ The Flashcard Quiz App is a simple, interactive Android application built with J
 
 
 
-![Question 5](https://github.com/user-attachments/assets/87571478-d7ee-45a4-ac41-ed34ba6f0346)
+![Screenshot_2025 05 16_18 39 15 212](https://github.com/user-attachments/assets/0519fbdd-b268-4136-a665-7809ac8ec78a)
+
 
 
 
